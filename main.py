@@ -97,10 +97,10 @@ def lightcmd(ip=None, cmd=None):
 				R,G,B = (RGBint >> 16) & 255, (RGBint >> 8) & 255,RGBint & 255
 				return f"rgb({R}, {G}, {B})"
 			elif cmd == "DECREASE_TEMPERATURE":
-				bulb.set_color_temp(int(bulb.get_properties()['ct'])-1000)
+				bulb.set_color_temp(int(bulb.get_properties()['ct'])+1000)
 				return f"rgb{settings['kelvin_table'][bulb.get_properties()['ct']]}"
 			elif cmd == "INCREASE_TEMPERATURE":
-				bulb.set_color_temp(int(bulb.get_properties()['ct'])+1000)
+				bulb.set_color_temp(int(bulb.get_properties()['ct'])-1000)
 				return f"rgb{settings['kelvin_table'][bulb.get_properties()['ct']]}"
 		except Exception as e:
 			print(e)
