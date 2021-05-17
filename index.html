@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="https://kit.fontawesome.com/ada0a3530b.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="style.css">
+		<link rel="shortcut icon" href="/get_image?filename=favicon.png" type="image/png">
+		<title>Yeelight Controls</title>
+	</head>
+	<body>
+		<select name="LightSelect" id="LightSelect">
+		@lightspy
+		</select>
+		<br>
+		<button id="TOGGLE" onclick="enable(this)" style="color:#FFAC59" class='btn hexagon btn-default'>
+			<i class="far fa-lightbulb"></i>																					<!-- on/off -->
+		</button>
+		<br>                    
+		<button id="DECREASE_BRIGHTNESS" onclick="enable(this)" style="color:#868686" class='btn hexagon btn-default'>
+			<i class="fas fa-minus"></i>																						<!-- bright- -->
+		</button>
+		<button id="INCREASE_BRIGHTNESS" onclick="enable(this)" style="color:#868686" class='btn hexagon btn-default'>
+			<i class="fas fa-plus"></i>																							<!-- brigh+ -->
+		</button>
+		<br>         
+		<button id='SET_COLOR" "255" "0" "0' onclick="enable(this)" style="color:#FF6063" class='btn hexagon btn-default'>
+			<p-i style="font:bold;">R</p-i>																						<!-- R -->
+		</button>
+		<button id='SET_COLOR" "0" "255" "0' onclick="enable(this)" style="color:#80C573" class='btn hexagon btn-default'>
+			<p-i style="font:bold;">G</p-i>																						<!-- G -->
+		</button>
+		<button id='SET_COLOR" "100" "150" "200' onclick="enable(this)" style="color:#5B8DEE" class='btn hexagon btn-default'>
+			<p-i style="font:bold;">B</p-i>																						<!-- B -->
+		</button>
+		<br>
+		<button id="DECREASE_TEMPERATURE" onclick="enable(this)" style="color:#85C8E6" class='btn hexagon btn-default'>
+			<i class="far fa-snowflake"></i>																					<!-- Temp- -->
+		</button>
+		<button id="INCREASE_TEMPERATURE" onclick="enable(this)" style="color: #E9411C" class='btn hexagon btn-default'>
+			<i class="fas fa-sun"></i>																							<!-- Temp+ -->
+		</button>
+		<pre id="return">
+		</pre>
+		<br>
+		<img src="/get_image?filename=light.png">
+		<div class="bg-light" id="bg-light"></div>
+		<script type=text/javascript>
+			function enable(e) {
+				ip = document.getElementById("LightSelect").value
+				$.getJSON('/LightSettings?cmd=' + e.id + '&ip=' + ip, function(data) {
+					if(data['return'].includes('rgb')) {
+						document.getElementById('bg-light').style.background = data['return']
+					} else {
+						document.getElementById('return').innerHTML = data['return']
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
